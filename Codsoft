@@ -1,0 +1,283 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class NumberGuessingGame {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        
+        int lowerBound = 1;
+        int upperBound = 100;
+        int numberToGuess = random.nextInt(upperBound - lowerBound + 1) + lowerBound;
+        
+        int attempts = 0;
+        boolean hasGuessedCorrectly = false;
+        
+        System.out.println("Welcome to the Number Guessing Game!");
+        System.out.println("I'm thinking of a number between " + lowerBound + " and " + upperBound + ".");
+        
+        while (!hasGuessedCorrectly) {
+            System.out.print("Guess the number: ");
+            int userGuess = scanner.nextInt();
+            attempts++;
+            
+            if (userGuess == numberToGuess) {
+                hasGuessedCorrectly = true;
+                System.out.println("Congratulations! You guessed the number " + numberToGuess + " in " + attempts + " attempts.");
+            } else if (userGuess < numberToGuess) {
+                System.out.println("Try higher.");
+            } else {
+                System.out.println("Try lower.");
+            }
+        }
+        
+        scanner.close();
+    }
+}
+
+
+
+import java.util.Scanner;
+public class ATM_Transaction
+{
+    public static void main(String args[] )
+    { 
+        int balance = 5000, withdraw, deposit;
+        Scanner s = new Scanner(System.in);
+        while(true)
+        {
+            System.out.println("Automated Teller Machine");
+            System.out.println("Choose 1 for Withdraw");
+            System.out.println("Choose 2 for Deposit");
+            System.out.println("Choose 3 for Check Balance");
+            System.out.println("Choose 4 for EXIT");
+            System.out.print("Choose the operation you want to perform:");
+            int n = s.nextInt();
+            switch(n)
+            {
+                case 1:
+                System.out.print("Enter money to be withdrawn:");
+                withdraw = s.nextInt();
+                if(balance >= withdraw)
+                {
+                    balance = balance - withdraw;
+                    System.out.println("Please collect your money");
+                }
+                else
+                {
+                    System.out.println("Insufficient Balance");
+                }
+                System.out.println("");
+                break;
+ 
+                case 2:
+                System.out.print("Enter money to be deposited:");
+                deposit = s.nextInt();
+                balance = balance + deposit;
+                System.out.println("Your Money has been successfully depsited");
+                System.out.println("");
+                break;
+ 
+                case 3:
+                System.out.println("Balance : "+balance);
+                System.out.println("");
+                break;
+ 
+                case 4:
+                System.exit(0);
+            }
+        }
+    }
+}
+
+
+
+
+import java.util.*;
+
+class Student {
+    private int studentId;
+    private String name;
+    private double feesPaid;
+    private double totalFees;
+
+    public Student(int studentId, String name, double totalFees) {
+        this.studentId = studentId;
+        this.name = name;
+        this.totalFees = totalFees;
+        this.feesPaid = 0;
+    }
+
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getFeesPaid() {
+        return feesPaid;
+    }
+
+    public double getTotalFees() {
+        return totalFees;
+    }
+
+    public void payFees(double amount) {
+        feesPaid += amount;
+    }
+
+    public double getRemainingFees() {
+        return totalFees - feesPaid;
+    }
+
+    @Override
+    public String toString() {
+        return "Student ID: " + studentId + "\nName: " + name + "\nTotal Fees: $" + totalFees +
+               "\nFees Paid: $" + feesPaid + "\nRemaining Fees: $" + getRemainingFees();
+    }
+}
+
+class FeesManagementSystem {
+    private List<Student> students;
+
+    public FeesManagementSystem() {
+        students = new ArrayList<>();
+    }
+
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    public Student findStudent(int studentId) {
+        for (Student student : students) {
+            if (student.getStudentId() == studentId) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    public void payFees(int studentId, double amount) {
+        Student student = findStudent(studentId);
+        if (student != null) {
+            student.payFees(amount);
+            System.out.println("Fees paid successfully!");
+        } else {
+            System.out.println("Student not found.");
+        }
+    }
+
+    public void displayStudentDetails(int studentId) {
+        Student student = findStudent(studentId);
+        if (student != null) {
+            System.out.println(student);
+        } else {
+            System.out.println("Student not found.");
+        }
+    }
+
+    public static void main(String[] args) {
+        FeesManagementSystem system = new FeesManagementSystem();
+
+        Student student1 = new Student(1, "John Doe", 1000);
+        Student student2 = new Student(2, "Jane Smith", 1500);
+
+        system.addStudent(student1);
+        system.addStudent(student2);
+
+        system.displayStudentDetails(1);
+        System.out.println("\n");
+
+        system.payFees(1, 500);
+        system.displayStudentDetails(1);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.util.Scanner;
+
+public class BMICalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter your weight in kilograms: ");
+        double weight = scanner.nextDouble();
+
+        System.out.print("Enter your height in meters: ");
+        double height = scanner.nextDouble();
+
+        double bmi = calculateBMI(weight, height);
+
+        System.out.println("Your BMI is: " + bmi);
+        System.out.println("BMI Category: " + interpretBMI(bmi));
+
+        scanner.close();
+    }
+
+    public static double calculateBMI(double weight, double height) {
+        // BMI formula: weight (kg) / (height (m) * height (m))
+        return weight / (height * height);
+    }
+
+    public static String interpretBMI(double bmi) {
+        if (bmi < 16) {
+            return "Severely underweight";
+        } else if (bmi < 18.5) {
+            return "Underweight";
+        } else if (bmi < 25) {
+            return "Normal (healthy) weight";
+        } else if (bmi < 30) {
+            return "Overweight";
+        } else if (bmi < 35) {
+            return "Obese Class I (Moderately obese)";
+        } else if (bmi < 40) {
+            return "Obese Class II (Severely obese)";
+        } else {
+            return "Obese Class III (Very severely obese)";
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
